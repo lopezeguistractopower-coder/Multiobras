@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MULTIOBRAS | Ingeniería, Procura y Construcción</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=1" sizes="any">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=1" sizes="64x64">
+    <link rel="apple-touch-icon" href="assets/favicon.png?v=1" sizes="180x180">
+    <meta name="theme-color" content="#0b0f17">
+
+    <!-- Fuentes corporativas y condensadas industriales -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Precarga de imagen crítica del Hero -->
+    <link rel="preload" as="image" href="assets/identidad-multiobras.jpg">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js para indicadores operativos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Paleta exacta del proyecto original: Azul Cielo, Obsidiana, Blanco y Gris Técnico -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        condensed: ['Barlow Condensed', 'sans-serif'],
+                    },
+                    colors: {
+                        skybrand: {
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        },
+                        obsidian: {
+                            950: '#05070a',
+                            900: '#0b0f17',
+                            800: '#131926',
+                        },
+                        steel: {
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            400: '#94a3b8',
+                            600: '#475569',
+                            800: '#1e293b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        body {
+            background-color: #05070a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        img,
+        svg {
+            max-width: 100%;
+        }
+        p,
+        h1,
+        h2,
+        h3,
+        button,
+        span {
+            overflow-wrap: break-word;
+        }
+
+        /* Cuadrícula arquitectónica sutil */
+        .blueprint-grid {
+            background-size: 56px 56px;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.045) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Oscuro */
+        .glass-dark {
+            background: rgba(11, 15, 23, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        /* Navbar dinámico */
+        #navbar.nav-scrolled {
+            padding-top: 0.5rem;
+        }
+        #navbar.nav-scrolled nav {
+            background: rgba(5, 7, 10, 0.92);
+            border-color: rgba(56, 189, 248, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+        }
+
+        /* Subrayado magnético animado en enlaces del nav */
+        .nav-link-cinema {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            padding: 4px 0;
+        }
+        .nav-link-cinema::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background-color: #38bdf8;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link-cinema:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Máscaras tipográficas */
+        .split-line-mask {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+            padding-bottom: 0.08em;
+            margin-bottom: -0.08em;
+        }
+        .split-word, .hero-char {
+            display: inline-block;
+        }
+
+        /* Profundidad Parallax */
+        .depth-frame {
+            overflow: hidden;
+            position: relative;
+        }
+        .depth-img {
+            transform: scale(1.12);
+        }
+
+        /* Tarjetas con elevación */
+        .tilt-card {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .tilt-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.22);
+        }
+
+        /* Preloader Cinemático con cierre garantizado */
+        #preloader {
+            transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.35s ease, visibility 0.45s ease;
+        }
+        #preloader.loaded {
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Zoom suave en tarjetas de proyectos */
+        .project-card img {
+            transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Fila interactiva de obras */
+        .work-row {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .work-row:hover {
+            padding-left: 1.25rem;
+            background: rgba(56, 189, 248, 0.06);
+        }
+        .work-row:hover .work-title {
+            color: #38bdf8;
+        }
+
+        /* Vista previa flotante */
+        #floating-preview {
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Acordeón suave para FAQ */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-content[hidden] {
+            display: none;
+        }
+        .faq-item.open .faq-content {
+            grid-template-rows: 1fr;
+        }
+        .faq-inner {
+            overflow: hidden;
+        }
+        .faq-item {
+            scroll-margin-top: 1rem;
+        }
+        .faq-item .faq-icon {
+            transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+        }
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 640px) {
+            section {
+                scroll-margin-top: 0;
+            }
+            #inicio {
+                min-height: 100svh;
+                padding-bottom: 1.5rem;
+            }
+            #inicio h1 {
+                font-size: clamp(2.65rem, 13vw, 4.25rem);
+            }
+            .faq-inner,
+            .faq-item button {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .faq-item button {
+                cursor: pointer;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Barra superior de progreso */
+        #scroll-progress {
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-skybrand-400 selection:text-obsidian-950">
+
+    <!-- Barra de progreso de scroll superior en Azul Cielo -->
+    <div id="scroll-progress" class="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-skybrand-500 via-skybrand-400 to-white z-[110]"></div>
+
+    <!-- =====================================================================
+         PRELOADER CINEMÁTICO INICIAL
+    ====================================================================== -->
+    <div id="preloader" class="fixed inset-0 z-[100] bg-obsidian-950 flex flex-col items-center justify-center border-b border-skybrand-400/20">
+        <div class="flex flex-col items-center gap-5">
+            <div class="w-28 h-20 flex items-center justify-center">
+                <img src="assets/multiobras-logo.svg"
+                     alt="MULTIOBRAS"
+                     data-fallback-src="https://placehold.co/120x120/ffffff/05070a?text=M"
+                     class="w-full h-full object-contain">
+            </div>
+            <div class="w-48 h-[2px] bg-obsidian-800 rounded-full overflow-hidden">
+                <div id="preloader-bar" class="h-full bg-skybrand-400 w-full transition-all duration-500"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         1. HERO FULL-SCREEN EDITORIAL CON PARALLAX Y REVELADO LETRA POR LETRA
+    ====================================================================== -->
+    <section id="inicio" class="relative min-h-screen flex flex-col justify-between pt-12 pb-8 px-4 sm:px-8 overflow-hidden">
+        <!-- Imagen de fondo arquitectónica/industrial -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="assets/identidad-multiobras.jpg"
+                 alt="Equipo de construcción e identidad corporativa de MULTIOBRAS"
+                 fetchpriority="high"
+                 decoding="async"
+                 data-fallback-src="assets/sede-multiobras.webp"
+                 class="w-full h-full object-cover object-center opacity-55 scale-110" id="hero-bg-img">
+            <div class="absolute inset-0 bg-gradient-to-b from-obsidian-950/80 via-obsidian-950/45 to-obsidian-950"></div>
+            <div class="absolute inset-0 blueprint-grid opacity-65"></div>
+        </div>
+
+        <div class="relative z-10 flex justify-center hero-fade-el">
+            <img src="assets/multiobras-logo.svg"
+                 alt="MULTIOBRAS"
+                 class="w-52 sm:w-64 h-auto object-contain"
+                 width="600"
+                 height="393">
+        </div>
+
+        <!-- Titular Monumental Centrado -->
+        <div class="relative z-10 max-w-6xl mx-auto text-center my-auto py-12 px-2">
+            <h1 id="hero-headline" class="font-condensed font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] text-white uppercase leading-[0.92] tracking-tight">
+                <span class="block overflow-hidden pb-1">
+                    <span class="hero-line block">CONSTRUIMOS LO QUE</span>
+                </span>
+                <span class="block overflow-hidden pb-2">
+                    <span class="hero-line block text-skybrand-400">OTROS IMAGINAN.</span>
+                </span>
+            </h1>
+            <p class="hero-fade-el mt-6 text-steel-200 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
+                Ejecución integral de proyectos de construcción e ingeniería, suministros industriales, alquiler de equipos y soluciones integrales para el sector industrial.
+            </p>
+
+            <!-- Botones de acción directa -->
+            <div class="hero-fade-el mt-8 flex flex-wrap items-center justify-center gap-3.5">
+                <a href="#obras-destacadas" class="magnetic-btn px-7 py-3.5 rounded-xl bg-skybrand-400 hover:bg-skybrand-300 text-obsidian-950 font-extrabold text-sm uppercase tracking-wider transition-colors duration-300 shadow-xl shadow-skybrand-400/25">
+                    Explorar Obras
+                </a>
+                <a href="#servicios" class="magnetic-btn px-7 py-3.5 rounded-xl glass-dark hover:bg-white/10 text-white border border-white/20 font-bold text-sm uppercase tracking-wider transition-colors duration-300">
+                    División IPC
+                </a>
+            </div>
+        </div>
+
+        <!-- Barra inferior de credenciales -->
+        <div class="relative z-10 max-w-7xl mx-auto w-full pt-6 border-t border-white/10 hero-fade-el">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 items-center text-center sm:text-left">
+                <div class="flex items-center justify-center sm:justify-start gap-2.5 text-steel-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-industry text-skybrand-400 text-lg"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest">Construcción e Ingeniería</span>
+                </div>
+                <div class="flex items-center justify-center sm:justify-start gap-2.5 text-steel-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-building-shield text-skybrand-400 text-lg"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest">Obras Civiles</span>
+                </div>
+                <div class="flex items-center justify-center sm:justify-start gap-2.5 text-steel-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-boxes-stacked text-skybrand-400 text-lg"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest">Procura API / ASME</span>
+                </div>
+                <div class="flex items-center justify-center sm:justify-end gap-2 text-xs font-bold text-steel-300">
+                    <i class="fa-solid fa-file-contract text-skybrand-400"></i>
+                    <span class="uppercase tracking-widest">RIF J-40713527-9</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         2. VISOR INTERACTIVO DE SERVICIOS IPC
+    ====================================================================== -->
+    <section id="servicios" class="relative py-24 px-4 sm:px-8 bg-obsidian-950 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-skybrand-400 block mb-2 scroll-fade">Nuestras Capacidades</span>
+                    <h2 class="split-title font-condensed font-extrabold text-4xl sm:text-6xl text-white uppercase tracking-tight leading-none">
+                        Servicios de Ingeniería, Procura y Construcción
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2 scroll-fade">
+                    <button type="button" data-action="service-prev" aria-label="Servicio anterior" class="w-11 h-11 rounded-xl glass-dark hover:bg-skybrand-400 hover:text-obsidian-950 text-white border border-white/15 flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button type="button" data-action="service-next" aria-label="Siguiente servicio" class="w-11 h-11 rounded-xl glass-dark hover:bg-skybrand-400 hover:text-obsidian-950 text-white border border-white/15 flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visor Panorámico Principal -->
+            <div class="scroll-scale relative rounded-3xl overflow-hidden border border-white/15 bg-obsidian-900 shadow-2xl">
+                <div class="depth-frame relative h-[440px] sm:h-[540px] w-full">
+                    <img id="service-hero-img"
+                         src="assets/ingenieria-puente.webp"
+                         alt="Servicio Multiobras"
+                         loading="lazy"
+                         decoding="async"
+                         data-fallback-src="https://placehold.co/1400x700/0b0f17/38bdf8?text=MULTIOBRAS+SERVICIOS"
+                         class="depth-img w-full h-full object-cover transition-opacity duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/45 to-obsidian-950/20"></div>
+
+                    <div class="absolute top-6 left-6 right-6 flex items-center justify-between">
+                        <span class="px-3.5 py-1.5 rounded-lg bg-obsidian-950/80 backdrop-blur-md border border-white/15 text-xs font-extrabold uppercase tracking-widest text-skybrand-400">
+                            MULTIOBRAS • DIVISIÓN IPC
+                        </span>
+                        <span id="service-counter" class="text-xs font-mono font-bold text-white/80 bg-obsidian-950/70 px-3 py-1 rounded-lg border border-white/10">
+                            01 / 04
+                        </span>
+                    </div>
+
+                    <div class="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+                        <div class="lg:col-span-8">
+                            <span id="service-tag" class="inline-block px-3 py-1 rounded-md bg-skybrand-400 text-obsidian-950 text-xs font-extrabold uppercase tracking-wider mb-3">
+                                Sector Industrial y Petrolero
+                            </span>
+                            <h3 id="service-title" class="font-condensed font-extrabold text-3xl sm:text-5xl text-white uppercase leading-none">
+                                Infraestructura Energética y Montaje Electromecánico
+                            </h3>
+                            <p id="service-desc" class="text-steel-200 text-sm sm:text-base mt-3 max-w-2xl leading-relaxed">
+                                Ejecución de facilidades de superficie, tendido de oleoductos, soldadura certificada, subestaciones eléctricas y paradas de planta bajo normativas API y ASME.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-4 flex lg:justify-end">
+                            <a href="#contacto" data-action="preset-contact-subject" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white hover:bg-skybrand-400 text-obsidian-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300">
+                                <span>Solicitar Alcance Técnico</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selector Inferior de 4 Pestañas -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 border-t border-white/10 bg-obsidian-950/90">
+                    <button type="button" data-action="service-slide" data-service-index="0" aria-pressed="true" id="srv-tab-0" class="srv-tab text-left p-4 sm:p-5 border-b lg:border-b-0 border-r border-white/10 transition-all bg-white/[0.04]">
+                        <span class="text-[11px] font-mono text-skybrand-400 font-bold block">01</span>
+                        <span class="font-display font-bold text-white text-xs sm:text-sm mt-1 block">Industrial y Petrolero</span>
+                    </button>
+                    <button type="button" data-action="service-slide" data-service-index="1" aria-pressed="false" id="srv-tab-1" class="srv-tab text-left p-4 sm:p-5 border-b lg:border-b-0 lg:border-r border-white/10 transition-all hover:bg-white/[0.03]">
+                        <span class="text-[11px] font-mono text-steel-400 font-bold block">02</span>
+                        <span class="font-display font-bold text-steel-200 text-xs sm:text-sm mt-1 block">Construcción Civil</span>
+                    </button>
+                    <button type="button" data-action="service-slide" data-service-index="2" aria-pressed="false" id="srv-tab-2" class="srv-tab text-left p-4 sm:p-5 border-r border-white/10 transition-all hover:bg-white/[0.03]">
+                        <span class="text-[11px] font-mono text-steel-400 font-bold block">03</span>
+                        <span class="font-display font-bold text-steel-200 text-xs sm:text-sm mt-1 block">Procura Especializada</span>
+                    </button>
+                    <button type="button" data-action="service-slide" data-service-index="3" aria-pressed="false" id="srv-tab-3" class="srv-tab text-left p-4 sm:p-5 transition-all hover:bg-white/[0.03]">
+                        <span class="text-[11px] font-mono text-steel-400 font-bold block">04</span>
+                        <span class="font-display font-bold text-steel-200 text-xs sm:text-sm mt-1 block">Ingeniería de Detalle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         3. OBRAS DESTACADAS (GRID 4 COLUMNAS CON FICHA TÉCNICA MODAL)
+    ====================================================================== -->
+    <section id="obras-destacadas" class="relative py-24 px-4 sm:px-8 bg-obsidian-900 border-t border-white/10 blueprint-grid">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-bold uppercase tracking-[0.25em] text-skybrand-400 scroll-fade">Portafolio Seleccionado</span>
+                <h2 class="split-title font-condensed font-extrabold text-4xl sm:text-6xl text-white uppercase tracking-tight mt-2 leading-none">
+                    Obras destacadas
+                </h2>
+                <p class="text-steel-400 mt-3 text-sm sm:text-base scroll-fade">
+                    Una selección de proyectos que reflejan cómo trabajamos: planificación, precisión técnica y cumplimiento de plazos. Haz clic en cualquier obra para ver su ficha detallada.
+                </p>
+            </div>
+
+            <!-- Filtros por especialidad -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-10 scroll-fade">
+                <button type="button" data-action="gallery-filter" data-filter="all" aria-pressed="true" class="gal-filter active px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider bg-skybrand-400 text-obsidian-950 transition-all">
+                    Todas las Obras
+                </button>
+                <button type="button" data-action="gallery-filter" data-filter="industrial" aria-pressed="false" class="gal-filter px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider glass-dark text-steel-200 hover:text-white border border-white/10 transition-all">
+                    Industrial y Petrolero
+                </button>
+                <button type="button" data-action="gallery-filter" data-filter="civil" aria-pressed="false" class="gal-filter px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider glass-dark text-steel-200 hover:text-white border border-white/10 transition-all">
+                    Construcción Civil
+                </button>
+                <button type="button" data-action="gallery-filter" data-filter="procura" aria-pressed="false" class="gal-filter px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider glass-dark text-steel-200 hover:text-white border border-white/10 transition-all">
+                    Procura y Montaje
+                </button>
+            </div>
+
+            <!-- Grid de 8 Obras Destacadas -->
+            <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Renderizado dinámico -->
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         4. OBRAS EN PROCESO Y OBRAS TERMINADAS (LISTADO INTERACTIVO CON PREVIEW)
+    ====================================================================== -->
+    <section id="portafolio-lista" class="relative py-24 px-4 sm:px-8 bg-obsidian-950 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-white/15">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-skybrand-400 block mb-1 scroll-fade">Registro Operativo</span>
+                    <h2 class="split-title font-condensed font-extrabold text-4xl sm:text-5xl text-white uppercase tracking-tight leading-none">
+                        Obras en proceso y obras terminadas
+                    </h2>
+                </div>
+
+                <!-- Pestañas En Proceso / Terminadas -->
+                <div class="inline-flex p-1 rounded-xl glass-dark border border-white/10 self-start sm:self-auto scroll-fade">
+                    <button type="button" id="btn-status-proceso" data-action="work-status" data-status="proceso" aria-pressed="true" class="px-4 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider bg-skybrand-400 text-obsidian-950 transition-all">
+                        En Proceso
+                    </button>
+                    <button type="button" id="btn-status-terminadas" data-action="work-status" data-status="terminadas" aria-pressed="false" class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-steel-300 hover:text-white transition-all">
+                        Terminadas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de filas interactivas -->
+            <div id="works-list-container" class="divide-y divide-white/10 mt-2">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Tarjeta Flotante de Vista Previa -->
+        <div id="floating-preview" class="hidden lg:block fixed z-40 w-64 h-44 rounded-2xl overflow-hidden border-2 border-skybrand-400 shadow-2xl opacity-0 scale-90">
+            <img id="floating-preview-img" src="" alt="Vista previa de obra" data-fallback-src="https://placehold.co/800x600/0b0f17/38bdf8?text=OBRA+MULTIOBRAS" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950/90 via-transparent to-transparent"></div>
+            <span id="floating-preview-badge" class="absolute bottom-2.5 left-3 right-3 text-[11px] font-bold text-white truncate"></span>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         5. INDICADORES DE CAPACIDAD Y TESTIMONIOS DE CLIENTES
+    ====================================================================== -->
+    <section id="capacidad" class="relative py-24 px-4 sm:px-8 bg-obsidian-900 border-t border-white/10">
+        <div class="max-w-7xl mx-auto space-y-20">
+            
+            <!-- Bloque A: Métricas y Gráficos -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5 space-y-5">
+                    <span class="inline-block px-3.5 py-1 rounded-full bg-skybrand-400/15 border border-skybrand-400/30 text-skybrand-400 text-xs font-bold uppercase tracking-widest scroll-fade">
+                        Control y Rendimiento IPC
+                    </span>
+                    <h2 class="split-title font-condensed font-extrabold text-4xl sm:text-5xl text-white uppercase tracking-tight leading-none">
+                        Capacidad técnica respaldada por <span class="text-skybrand-400">resultados medibles</span>
+                    </h2>
+                    <p class="text-steel-400 text-sm sm:text-base leading-relaxed scroll-fade">
+                        Articulamos ingeniería, procura y ejecución en campo con trazabilidad del 100%, protocolos HSE de cero accidentes y cumplimiento estricto de cronogramas críticos.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-3 pt-2 scroll-fade">
+                        <div class="glass-dark p-4 rounded-2xl border border-white/10">
+                            <p class="font-condensed font-extrabold text-3xl text-white"><span class="counter-num" data-target="100">100</span><span class="text-skybrand-400">%</span></p>
+                            <p class="text-[11px] text-steel-400 mt-1">Trazabilidad MTR</p>
+                        </div>
+                        <div class="glass-dark p-4 rounded-2xl border border-white/10">
+                            <p class="font-condensed font-extrabold text-3xl text-white"><span class="counter-num" data-target="98">98</span><span class="text-skybrand-400">%</span></p>
+                            <p class="text-[11px] text-steel-400 mt-1">Hitos a Tiempo</p>
+                        </div>
+                        <div class="glass-dark p-4 rounded-2xl border border-white/10">
+                            <p class="font-condensed font-extrabold text-3xl text-white"><span class="counter-num" data-target="24">24</span><span class="text-skybrand-400">/7</span></p>
+                            <p class="text-[11px] text-steel-400 mt-1">Soporte en Planta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 scroll-scale">
+                    <div class="glass-dark rounded-3xl p-6 border border-white/10">
+                        <h3 class="font-display font-bold text-white text-base">Índice de Cumplimiento IPC</h3>
+                        <p class="text-xs text-steel-400 mb-4">Efectividad por unidad operativa</p>
+                        <div class="relative h-52 w-full">
+                            <canvas id="efficiencyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-dark rounded-3xl p-6 border border-white/10">
+                        <h3 class="font-display font-bold text-white text-base">Distribución de Portafolio</h3>
+                        <p class="text-xs text-steel-400 mb-4">Participación por sector atendido</p>
+                        <div class="relative h-52 w-full">
+                            <canvas id="sectorsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque B: Testimonios -->
+            <div class="pt-8 border-t border-white/10">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-[0.25em] text-skybrand-400 scroll-fade">Respaldo Corporativo</span>
+                        <h2 class="split-title font-condensed font-extrabold text-4xl sm:text-5xl text-white uppercase tracking-tight mt-2 leading-none">
+                            Lo que dicen nuestros clientes
+                        </h2>
+                        <div class="flex items-center gap-2 mt-2 text-xs text-steel-300 scroll-fade">
+                            <div class="flex text-skybrand-400 gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="font-bold text-white">5.0</span>
+                            <span class="text-steel-400">• Evaluación promedio en auditorías de cierre de obra</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 stagger-cards">
+                    <div class="stagger-item tilt-card glass-dark rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-skybrand-400 text-xs gap-1 mb-3">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-sm text-steel-200 leading-relaxed">
+                                "Trabajar con Multiobras en la adecuación mecánica de nuestra estación de flujo fue garantía de orden y seguridad. Cumplieron cada prueba hidrostática antes del plazo."
+                            </p>
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <div>
+                                <p class="font-display font-bold text-white text-sm">Ing. Roberto Salazar</p>
+                                <p class="text-[11px] text-steel-400 uppercase tracking-wider">Gerente de Operaciones • Sector Petrolero</p>
+                            </div>
+                            <span class="w-8 h-8 rounded-lg bg-skybrand-400/15 text-skybrand-400 flex items-center justify-center text-xs font-bold">RS</span>
+                        </div>
+                    </div>
+
+                    <div class="stagger-item tilt-card glass-dark rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-skybrand-400 text-xs gap-1 mb-3">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-sm text-steel-200 leading-relaxed">
+                                "Su división de procura resolvió el suministro de válvulas y tuberías API con todos sus certificados de calidad MTR en tiempo récord para nuestra parada de planta."
+                            </p>
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <div>
+                                <p class="font-display font-bold text-white text-sm">Lic. Mariana Villalobos</p>
+                                <p class="text-[11px] text-steel-400 uppercase tracking-wider">Directora de Cadena de Suministro</p>
+                            </div>
+                            <span class="w-8 h-8 rounded-lg bg-skybrand-400/15 text-skybrand-400 flex items-center justify-center text-xs font-bold">MV</span>
+                        </div>
+                    </div>
+
+                    <div class="stagger-item tilt-card glass-dark rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-skybrand-400 text-xs gap-1 mb-3">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-sm text-steel-200 leading-relaxed">
+                                "Construyeron nuestro centro logístico y nave industrial de 3.200 m² con una precisión estructural impecable y excelente comunicación en cada avance semanal."
+                            </p>
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <div>
+                                <p class="font-display font-bold text-white text-sm">Arq. Carlos Mendoza</p>
+                                <p class="text-[11px] text-steel-400 uppercase tracking-wider">Director de Infraestructura Corporativa</p>
+                            </div>
+                            <span class="w-8 h-8 rounded-lg bg-skybrand-400/15 text-skybrand-400 flex items-center justify-center text-xs font-bold">CM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         6. SECCIÓN PANORÁMICA DE UBICACIÓN Y COBERTURA
+    ====================================================================== -->
+    <section id="ubicacion" class="relative py-28 px-4 sm:px-8 bg-obsidian-950 border-t border-white/10 overflow-hidden">
+        <div class="depth-frame absolute inset-0 z-0">
+            <img src="assets/operacion-terreno.webp"
+                 alt="Cobertura Operativa Multiobras"
+                 loading="lazy"
+                 decoding="async"
+                 data-fallback-src="https://placehold.co/1600x800/05070a/38bdf8?text=COBERTURA+MULTIOBRAS"
+                 class="depth-img w-full h-full object-cover opacity-35">
+            <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/80 to-obsidian-950/60"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-7 space-y-5">
+                <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-skybrand-400 scroll-fade">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    <span>Sede y Zona de Cobertura</span>
+                </span>
+                <h2 class="split-title font-condensed font-extrabold text-5xl sm:text-6xl lg:text-7xl text-white uppercase leading-[0.95]">
+                    Soluciones industriales desde Barcelona para todo el país.
+                </h2>
+                <p class="text-steel-200 text-base sm:text-lg max-w-xl leading-relaxed scroll-fade">
+                    Nuestra sede está ubicada en Centro Empresarial Vidoño, Barcelona, Estado Anzoátegui, con capacidad logística para suministros, equipos, vehículos y servicios de construcción a nivel nacional.
+                </p>
+                <div class="pt-2 flex flex-wrap gap-3 scroll-fade">
+                    <a href="#contacto" class="magnetic-btn inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-skybrand-400 hover:bg-skybrand-300 text-obsidian-950 font-extrabold text-sm transition-colors shadow-lg shadow-skybrand-400/20">
+                        <span>Agendar Visita Técnica</span>
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tarjeta Flotante de Ubicación Interactiva -->
+            <div class="lg:col-span-5 flex lg:justify-end scroll-scale">
+                <div class="tilt-card w-full max-w-sm rounded-2xl overflow-hidden bg-white text-obsidian-950 shadow-2xl border border-white/20">
+                    <div class="relative h-48 bg-slate-200 overflow-hidden blueprint-grid">
+                        <div class="absolute inset-0 bg-gradient-to-br from-skybrand-300/30 via-slate-100 to-slate-300"></div>
+                        <svg class="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 400 200" fill="none">
+                            <path d="M-20 140 Q 150 110 420 60" stroke="#0284c7" stroke-width="6"/>
+                            <path d="M120 -10 L 210 210" stroke="#64748b" stroke-width="4"/>
+                            <path d="M260 -10 L 310 210" stroke="#94a3b8" stroke-width="3"/>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <div class="px-3 py-1 rounded-lg bg-obsidian-950 text-white text-xs font-extrabold shadow-lg mb-1">
+                                Sede Central MULTIOBRAS
+                            </div>
+                            <div class="w-9 h-9 rounded-full bg-skybrand-500 text-white flex items-center justify-center shadow-xl ring-4 ring-skybrand-400/40">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Av+Argimiro+Gavaldon+Centro+Empresarial+Vidono+Barcelona+Anzoategui+Venezuela" target="_blank" rel="noopener noreferrer" class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-white/95 hover:bg-white text-[11px] font-bold text-skybrand-600 shadow flex items-center gap-1.5 transition-colors">
+                            <span>Abrir en Maps</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="font-display font-extrabold text-obsidian-950 text-sm">Sede Principal MULTIOBRAS</p>
+                        <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">Av. Argimiro Gavaldon, antigua vía Alterna, Centro Empresarial Vidoño, local E, planta baja, Barcelona, Estado Anzoátegui.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         7. PREGUNTAS FRECUENTES + FORMULARIO DE CONTACTO DIRECTO
+    ====================================================================== -->
+    <section id="faq" class="relative py-24 px-4 sm:px-8 bg-obsidian-900 border-t border-white/10">
+        <div class="max-w-7xl mx-auto space-y-24">
+
+            <!-- Preguntas Frecuentes -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div class="lg:col-span-5">
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-skybrand-400 scroll-fade">Dudas Operativas</span>
+                    <h2 class="split-title font-condensed font-extrabold text-5xl sm:text-6xl text-white uppercase leading-none mt-2">
+                        PREGUNTAS FRECUENTES
+                    </h2>
+                    <p class="text-steel-400 text-sm mt-4 max-w-sm leading-relaxed scroll-fade">
+                        Resolvemos las consultas principales sobre nuestros procesos de licitación, procura de materiales y ejecución de obras civiles e industriales.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 space-y-3 stagger-cards" id="faq-container">
+                    <div class="stagger-item faq-item glass-dark rounded-2xl border border-white/10 overflow-hidden" data-pinned="false">
+                        <button type="button" data-action="toggle-faq" aria-expanded="false" class="w-full p-5 text-left flex items-center justify-between gap-4">
+                            <span class="font-display font-bold text-white text-sm sm:text-base">¿Qué tipo de obras y proyectos ejecuta Multiobras?</span>
+                            <span class="faq-icon w-8 h-8 rounded-lg bg-white/10 text-white flex items-center justify-center shrink-0 font-bold transition-transform">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </span>
+                        </button>
+                        <div class="faq-content" hidden>
+                            <div class="faq-inner px-5 pb-5 text-sm text-steel-300 leading-relaxed border-t border-white/5 pt-3">
+                                Ejecutamos proyectos integrales de Ingeniería, Procura y Construcción (IPC) en dos grandes vertientes: el <strong>sector industrial y petrolero</strong> (oleoductos, montaje electromecánico, subestaciones y paradas de planta) y la <strong>construcción civil</strong> (galpones, edificaciones corporativas, vialidad y fundaciones especiales).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stagger-item faq-item glass-dark rounded-2xl border border-white/10 overflow-hidden" data-pinned="false">
+                        <button type="button" data-action="toggle-faq" aria-expanded="false" class="w-full p-5 text-left flex items-center justify-between gap-4">
+                            <span class="font-display font-bold text-white text-sm sm:text-base">¿Realizan procura y suministro de materiales sin ejecución de obra?</span>
+                            <span class="faq-icon w-8 h-8 rounded-lg bg-white/10 text-white flex items-center justify-center shrink-0 font-bold transition-transform">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </span>
+                        </button>
+                        <div class="faq-content" hidden>
+                            <div class="faq-inner px-5 pb-5 text-sm text-steel-300 leading-relaxed border-t border-white/5 pt-3">
+                                Sí. Nuestra unidad de <strong>Procura Especializada</strong> abastece directamente a empresas industriales, petroleras y constructoras con tuberías, válvulas API/ASME, equipos de bombeo, material eléctrico antiexplosión y aceros estructurales con trazabilidad certificada.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stagger-item faq-item glass-dark rounded-2xl border border-white/10 overflow-hidden" data-pinned="false">
+                        <button type="button" data-action="toggle-faq" aria-expanded="false" class="w-full p-5 text-left flex items-center justify-between gap-4">
+                            <span class="font-display font-bold text-white text-sm sm:text-base">¿En qué zonas geográficas tienen cobertura operativa?</span>
+                            <span class="faq-icon w-8 h-8 rounded-lg bg-white/10 text-white flex items-center justify-center shrink-0 font-bold transition-transform">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </span>
+                        </button>
+                        <div class="faq-content" hidden>
+                            <div class="faq-inner px-5 pb-5 text-sm text-steel-300 leading-relaxed border-t border-white/5 pt-3">
+                                Contamos con sede principal en Barcelona, Estado Anzoátegui, y capacidad logística para movilizar personal, maquinaria, vehículos y suministros a todo el territorio nacional.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stagger-item faq-item glass-dark rounded-2xl border border-white/10 overflow-hidden" data-pinned="false">
+                        <button type="button" data-action="toggle-faq" aria-expanded="false" class="w-full p-5 text-left flex items-center justify-between gap-4">
+                            <span class="font-display font-bold text-white text-sm sm:text-base">¿Cómo solicito una cotización o participo en una licitación?</span>
+                            <span class="faq-icon w-8 h-8 rounded-lg bg-white/10 text-white flex items-center justify-center shrink-0 font-bold transition-transform">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </span>
+                        </button>
+                        <div class="faq-content" hidden>
+                            <div class="faq-inner px-5 pb-5 text-sm text-steel-300 leading-relaxed border-t border-white/5 pt-3">
+                                Completa el formulario de requerimiento técnico justo debajo con los cómputos métricos, especificaciones o alcance de tu proyecto. Nuestro departamento de estimación de costos responderá en menos de 24 horas hábiles.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario Corporativo de Contacto y Licitaciones -->
+            <div id="contacto" class="scroll-scale glass-dark rounded-3xl p-6 sm:p-12 border border-skybrand-400/25 relative overflow-hidden">
+                <div class="absolute -top-28 -right-28 w-72 h-72 bg-skybrand-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="inline-block px-3.5 py-1 rounded-full bg-skybrand-400/15 text-skybrand-400 text-xs font-extrabold uppercase tracking-widest">
+                            Contacto Directo
+                        </span>
+                        <h3 class="split-title font-condensed font-extrabold text-4xl sm:text-5xl text-white uppercase leading-none">
+                            Cuentanos tu proyecto y lo hacemos realidad
+                        </h3>
+                        <p class="text-steel-300 text-sm leading-relaxed">
+                            Nuestro equipo de ingenieros y especialistas en procura está listo para evaluar tus planos, listas de materiales o requerimientos de obra.
+                        </p>
+                        <div class="space-y-2.5 pt-2 text-xs sm:text-sm text-steel-200">
+                            <p class="flex items-center gap-3"><i class="fa-solid fa-phone text-skybrand-400"></i> <a href="tel:+584147857408" class="hover:text-skybrand-400">0414 7857408</a></p>
+                            <p class="flex items-center gap-3"><i class="fa-solid fa-phone text-skybrand-400"></i> <a href="tel:+584248432247" class="hover:text-skybrand-400">0424 8432247</a></p>
+                            <p class="flex items-center gap-3"><i class="fa-solid fa-clock text-skybrand-400"></i> Lunes a Viernes • 8:00 AM - 5:00 PM</p>
+                            <p class="flex items-center gap-3"><i class="fa-solid fa-file-contract text-skybrand-400"></i> RIF J-40713527-9</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <form id="quoteForm" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contactName" class="block text-[11px] font-bold uppercase tracking-wider text-steel-300 mb-1.5">Nombre y Cargo</label>
+                                    <input id="contactName" name="name" type="text" required autocomplete="name" placeholder="Ej. Ing. Carlos Mendoza" class="w-full px-4 py-3 rounded-xl bg-obsidian-950/80 border border-white/10 text-white placeholder-steel-600 focus:outline-none focus:border-skybrand-400 text-sm">
+                                </div>
+                                <div>
+                                    <label for="contactCompany" class="block text-[11px] font-bold uppercase tracking-wider text-steel-300 mb-1.5">Empresa / Institución</label>
+                                    <input id="contactCompany" name="company" type="text" required autocomplete="organization" placeholder="Nombre de la empresa" class="w-full px-4 py-3 rounded-xl bg-obsidian-950/80 border border-white/10 text-white placeholder-steel-600 focus:outline-none focus:border-skybrand-400 text-sm">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contactEmail" class="block text-[11px] font-bold uppercase tracking-wider text-steel-300 mb-1.5">Correo Corporativo</label>
+                                    <input id="contactEmail" name="email" type="email" required autocomplete="email" placeholder="correo@empresa.com" class="w-full px-4 py-3 rounded-xl bg-obsidian-950/80 border border-white/10 text-white placeholder-steel-600 focus:outline-none focus:border-skybrand-400 text-sm">
+                                </div>
+                                <div>
+                                    <label for="formAreaSelect" class="block text-[11px] font-bold uppercase tracking-wider text-steel-300 mb-1.5">División Requerida</label>
+                                    <select id="formAreaSelect" name="area" class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-white/10 text-white focus:outline-none focus:border-skybrand-400 text-sm">
+                                        <option value="Industrial y Petrolero">Sector Industrial y Petrolero</option>
+                                        <option value="Construcción Civil">Construcción Civil e Infraestructura</option>
+                                        <option value="Procura Especializada">Procura de Equipos y Materiales</option>
+                                        <option value="Alquiler de Equipos y Vehículos">Alquiler de Equipos y Vehículos</option>
+                                        <option value="Proyecto Integral IPC">Proyecto Integral Llave en Mano (IPC)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="contactMessage" class="block text-[11px] font-bold uppercase tracking-wider text-steel-300 mb-1.5">Alcance Técnico o Requerimiento</label>
+                                <textarea id="contactMessage" name="message" rows="3" required placeholder="Describe brevemente la obra, ubicación o lista de materiales solicitados..." class="w-full px-4 py-3 rounded-xl bg-obsidian-950/80 border border-white/10 text-white placeholder-steel-600 focus:outline-none focus:border-skybrand-400 text-sm"></textarea>
+                            </div>
+
+                            <button type="submit" class="magnetic-btn w-full py-4 rounded-xl bg-skybrand-400 hover:bg-skybrand-300 text-obsidian-950 font-extrabold text-sm uppercase tracking-wider transition-colors duration-300 shadow-lg shadow-skybrand-400/25 flex items-center justify-center gap-2">
+                                <span>Enviar Solicitud Técnica</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+
+                        <div id="formSuccessMsg" class="hidden mt-4 p-4 rounded-xl bg-skybrand-400/15 border border-skybrand-400/40 text-skybrand-300 text-sm flex items-center gap-3" role="status" aria-live="polite">
+                            <i class="fa-solid fa-circle-check text-xl text-skybrand-400"></i>
+                            <div>
+                                <p id="formStatusHeading" class="font-bold text-white"></p>
+                                <p id="formStatusCopy" class="text-xs text-steel-300"></p>
+                                <a id="whatsappFallbackLink" class="hidden inline-flex mt-3 px-4 py-2 rounded-lg bg-skybrand-400 hover:bg-skybrand-300 text-obsidian-950 font-bold text-xs uppercase tracking-wide" target="_blank" rel="noopener noreferrer">
+                                    Continuar en WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         8. FOOTER ARCHITECTURAL CON TARJETA CENTRAL Y TIPOGRAFÍA GIGANTE
+    ====================================================================== -->
+    <footer class="relative pt-24 pb-8 px-4 sm:px-8 bg-obsidian-950 border-t border-white/10 overflow-hidden">
+        <div class="depth-frame absolute inset-0 z-0 opacity-20">
+            <img src="assets/obra-cevidono.webp"
+                 alt="Arquitectura y Construcción"
+                 loading="lazy"
+                 decoding="async"
+                 class="depth-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-obsidian-950 via-obsidian-950/70 to-obsidian-950"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto scroll-scale">
+            <div class="glass-dark rounded-3xl p-8 sm:p-10 border border-white/15 shadow-2xl">
+                <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/10">
+                    <div class="flex items-center gap-3">
+                        <img src="assets/multiobras-logo.svg"
+                             alt="MULTIOBRAS"
+                             data-fallback-src="https://placehold.co/100x100/ffffff/05070a?text=M"
+                             class="h-14 w-20 object-contain">
+                    </div>
+                    <a href="#inicio" aria-label="Volver arriba" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-skybrand-400 hover:text-obsidian-950 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-arrow-up text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 pb-8 border-b border-white/10 font-condensed font-bold text-2xl sm:text-3xl text-white uppercase tracking-wide">
+                    <div class="space-y-2">
+                        <a href="#inicio" class="block hover:text-skybrand-400 transition-colors">Inicio</a>
+                        <a href="#obras-destacadas" class="block hover:text-skybrand-400 transition-colors">Obras</a>
+                        <a href="#portafolio-lista" class="block hover:text-skybrand-400 transition-colors">Terminadas</a>
+                    </div>
+                    <div class="space-y-2">
+                        <a href="#servicios" class="block hover:text-skybrand-400 transition-colors">Servicios</a>
+                        <a href="#portafolio-lista" data-action="work-status-link" data-status="proceso" class="block hover:text-skybrand-400 transition-colors">En Proceso</a>
+                        <a href="#contacto" class="block hover:text-skybrand-400 transition-colors">Contacto</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 text-xs text-steel-300">
+                    <div class="space-y-1.5">
+                        <span class="block text-[10px] font-bold uppercase tracking-widest text-steel-400">Divisiones</span>
+                        <p class="text-white font-semibold">Ingeniería y Construcción</p>
+                        <p class="text-white font-semibold">Suministros y Alquiler de Equipos</p>
+                    </div>
+                    <div class="space-y-1.5">
+                        <span class="block text-[10px] font-bold uppercase tracking-widest text-steel-400">Contacto</span>
+                        <p class="text-white font-semibold">0414 7857408 / 0424 8432247</p>
+                        <p class="text-steel-400">Centro Empresarial Vidoño, Barcelona</p>
+                        <p class="text-steel-400">RIF J-40713527-9</p>
+                    </div>
+                </div>
+
+                <a href="#contacto" class="mt-6 w-full py-3.5 rounded-xl bg-skybrand-400 hover:bg-skybrand-300 text-obsidian-950 font-extrabold text-xs uppercase tracking-widest flex items-center justify-center transition-colors">
+                    Solicitar Cotización Ahora
+                </a>
+            </div>
+        </div>
+
+        <div class="relative z-10 mt-14">
+            <div class="max-w-7xl mx-auto mt-4 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-steel-400">
+                <span>© 2026 MULTIOBRAS. Todos los derechos reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         MODAL DE FICHA TÉCNICA DE OBRA (AL HACER CLIC EN CUALQUIER PROYECTO)
+    ====================================================================== -->
+    <div id="project-modal" class="hidden fixed inset-0 z-[90] bg-obsidian-950/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6">
+        <div class="glass-dark max-w-2xl w-full rounded-3xl overflow-hidden border border-skybrand-400/35 shadow-2xl">
+            <div class="relative h-64 sm:h-72 bg-obsidian-900">
+                <img id="modal-img" src="" alt="Detalle de Obra" data-fallback-src="https://placehold.co/800x600/0b0f17/38bdf8?text=OBRA+MULTIOBRAS" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/30 to-transparent"></div>
+                <button type="button" data-action="close-project-modal" aria-label="Cerrar ficha" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian-950/80 hover:bg-skybrand-400 text-white hover:text-obsidian-950 flex items-center justify-center border border-white/15 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="absolute bottom-4 left-6 right-6">
+                    <span id="modal-badge" class="px-3 py-1 rounded-md bg-skybrand-400 text-obsidian-950 text-xs font-extrabold uppercase tracking-wider"></span>
+                    <h3 id="modal-title" class="font-condensed font-extrabold text-3xl sm:text-4xl text-white uppercase mt-2"></h3>
+                </div>
+            </div>
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs text-steel-300 pb-4 border-b border-white/10">
+                    <span><i class="fa-solid fa-location-dot text-skybrand-400 mr-1.5"></i><strong id="modal-location"></strong></span>
+                    <span><i class="fa-solid fa-calendar text-skybrand-400 mr-1.5"></i>Año: <strong id="modal-year"></strong></span>
+                    <span><i class="fa-solid fa-circle-check text-skybrand-400 mr-1.5"></i>Estándar: <strong>IPC Certificado</strong></span>
+                </div>
+                <p id="modal-desc" class="text-sm text-steel-200 leading-relaxed"></p>
+                <div class="pt-3 flex justify-end gap-3">
+                    <button type="button" data-action="close-project-modal" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-steel-200 text-xs font-bold uppercase tracking-wider">
+                        Cerrar
+                    </button>
+                    <a href="#contacto" data-action="close-project-modal" class="px-5 py-2.5 rounded-xl bg-skybrand-400 hover:bg-skybrand-300 text-obsidian-950 text-xs font-extrabold uppercase tracking-wider">
+                        Cotizar Obra Similar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT COMPLETO, AUTÓNOMO Y DE ALTO RENDIMIENTO
+    ====================================================================== -->
+    <script>
+        (() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const whatsappNumber = '584147857408';
+        document.addEventListener('error', handleImageError, true);
+
+        // 1. Datos de los 4 servicios principales para el visor panorámico
+        const servicesSlides = [
+            {
+                tag: "Ingeniería y Construcción",
+                title: "Ingeniería, Obras Civiles y Montajes Industriales",
+                desc: "Desarrollo y ejecución de proyectos de ingeniería, obras civiles, instalaciones industriales y soluciones constructivas adaptadas a las necesidades de cada operación.",
+                img: "assets/ingenieria-puente.webp",
+                area: "Industrial y Petrolero"
+            },
+            {
+                tag: "Construcción Civil",
+                title: "Obras de Infraestructura, Naves Industriales y Vialidad",
+                desc: "Construcción integral de galpones de grandes luces, edificaciones corporativas, movimiento de tierras, drenajes hidráulicos y fundaciones especiales para maquinaria pesada.",
+                img: "assets/obra-infraestructura.webp",
+                area: "Construcción Civil"
+            },
+            {
+                tag: "Suministros Especializados",
+                title: "Abastecimiento de Equipos y Materiales Industriales",
+                desc: "Suministro de materiales, herramientas y equipos para construcción e industria, con atención y coordinación según los requerimientos técnicos del cliente.",
+                img: "assets/procura-almacen.webp",
+                area: "Procura Especializada"
+            },
+            {
+                tag: "Alquiler de Equipos",
+                title: "Alquiler de Equipos, Maquinaria y Vehículos",
+                desc: "Disponibilidad de equipos y vehículos para apoyar obras, mantenimientos y operaciones industriales, con coordinación según ubicación, duración y requerimiento.",
+                img: "assets/ingenieria-planificacion.webp",
+                area: "Alquiler de Equipos y Vehículos"
+            }
+        ];
+
+        let currentServiceIdx = 0;
+        let serviceSlideRequest = 0;
+
+        function setServiceSlide(idx) {
+            const item = servicesSlides[idx];
+            if (!item) return;
+            currentServiceIdx = idx;
+
+            const imgEl = document.getElementById('service-hero-img');
+            imgEl.style.opacity = '0.35';
+            const request = ++serviceSlideRequest;
+            const nextImage = new Image();
+            nextImage.addEventListener('load', () => {
+                if (request !== serviceSlideRequest) return;
+                imgEl.src = item.img;
+                imgEl.style.opacity = '1';
+                delete imgEl.dataset.fallbackApplied;
+            }, { once: true });
+            nextImage.addEventListener('error', () => {
+                if (request !== serviceSlideRequest) return;
+                imgEl.src = item.img;
+                imgEl.style.opacity = '1';
+                delete imgEl.dataset.fallbackApplied;
+            }, { once: true });
+            nextImage.src = item.img;
+
+            document.getElementById('service-counter').textContent = `0${idx + 1} / 04`;
+            document.getElementById('service-tag').textContent = item.tag;
+            document.getElementById('service-title').textContent = item.title;
+            document.getElementById('service-desc').textContent = item.desc;
+
+            document.querySelectorAll('.srv-tab').forEach((tab, i) => {
+                const numSpan = tab.querySelector('span:first-child');
+                const titleSpan = tab.querySelector('span:last-child');
+                tab.setAttribute('aria-pressed', i === idx ? 'true' : 'false');
+                if (i === idx) {
+                    tab.classList.add('bg-white/[0.06]');
+                    numSpan.classList.remove('text-steel-400');
+                    numSpan.classList.add('text-skybrand-400');
+                    titleSpan.classList.remove('text-steel-200');
+                    titleSpan.classList.add('text-white');
+                } else {
+                    tab.classList.remove('bg-white/[0.06]');
+                    numSpan.classList.add('text-steel-400');
+                    numSpan.classList.remove('text-skybrand-400');
+                    titleSpan.classList.add('text-steel-200');
+                    titleSpan.classList.remove('text-white');
+                }
+            });
+        }
+
+        function nextService() {
+            setServiceSlide((currentServiceIdx + 1) % servicesSlides.length);
+        }
+
+        function prevService() {
+            setServiceSlide((currentServiceIdx - 1 + servicesSlides.length) % servicesSlides.length);
+        }
+
+        function presetContactSubject() {
+            const select = document.getElementById('formAreaSelect');
+            if (select && servicesSlides[currentServiceIdx]) {
+                select.value = servicesSlides[currentServiceIdx].area;
+            }
+        }
+
+        // 2. Datos de Obras Destacadas (8 proyectos filtrables)
+        const featuredProjects = [
+            {
+                id: 1,
+                category: "industrial",
+                badge: "Industrial y Petrolero",
+                title: "Estación de Flujo Norte",
+                location: "Maturín, Monagas",
+                year: "2025",
+                img: "assets/operacion-terreno.webp",
+                desc: "Adecuación mecánica, instalación de múltiples de producción, válvulas de control automatizadas y pruebas hidrostáticas de alta presión."
+            },
+            {
+                id: 2,
+                category: "civil",
+                badge: "Construcción Civil",
+                title: "Complejo Logístico Oriente",
+                location: "Zona Industrial, Monagas",
+                year: "2025",
+                img: "assets/obra-infraestructura.webp",
+                desc: "Construcción de nave industrial de 3.200 m² en estructura metálica aporticada, losa de concreto armado de alta resistencia y patio de maniobras."
+            },
+            {
+                id: 3,
+                category: "procura",
+                badge: "Procura y Montaje",
+                title: "Suministro Línea Troncales 16\"",
+                location: "Anaco, Anzoátegui",
+                year: "2024",
+                img: "assets/procura-almacen.webp",
+                desc: "Procura internacional, inspección en fábrica y entrega en sitio de 4.5 km de tubería de acero al carbono API 5L X52 con revestimiento tricapa."
+            },
+            {
+                id: 4,
+                category: "industrial",
+                badge: "Industrial y Petrolero",
+                title: "Subestación Eléctrica 34.5 kV",
+                location: "Punta de Mata, Monagas",
+                year: "2025",
+                img: "assets/sede-multiobras.webp",
+                desc: "Obra civil de bancadas, montaje de transformadores de potencia, celdas de media tensión y sistema de puesta a tierra industrial."
+            },
+            {
+                id: 5,
+                category: "civil",
+                badge: "Construcción Civil",
+                title: "Edificio Corporativo IPC",
+                location: "Maturín, Monagas",
+                year: "2024",
+                img: "assets/ingenieria-planificacion.webp",
+                desc: "Edificación administrativa de 4 niveles con fachada muro cortina, climatización central, planta eléctrica de respaldo y urbanismo exterior."
+            },
+            {
+                id: 6,
+                category: "procura",
+                badge: "Procura y Montaje",
+                title: "Sistema Contra Incendio Planta",
+                location: "Barcelona, Anzoátegui",
+                year: "2024",
+                img: "assets/guia-productos.webp",
+                desc: "Procura e instalación de motobombas listadas UL/FM, red de hidrantes, monitores de espuma y tableros de control certificados."
+            },
+            {
+                id: 7,
+                category: "civil",
+                badge: "Construcción Civil",
+                title: "Vialidad y Drenajes Industriales",
+                location: "Morichal, Monagas",
+                year: "2025",
+                img: "assets/ingenieria-puente.webp",
+                desc: "Movimiento de tierras, estabilización de taludes, alcantarillado pluvial de concreto armado y pavimentación asfáltica de acceso pesado."
+            },
+            {
+                id: 8,
+                category: "industrial",
+                badge: "Industrial y Petrolero",
+                title: "Mantenimiento Tanques Crudo",
+                location: "Puerto La Cruz, Anzoátegui",
+                year: "2024",
+                img: "assets/operacion-terreno.webp",
+                desc: "Saneamiento, reemplazo de láminas de fondo y techo, sandblasting abrasivo y aplicación de recubrimiento epóxico industrial."
+            }
+        ];
+
+        function createElement(tagName, className, text) {
+            const element = document.createElement(tagName);
+            if (className) element.className = className;
+            if (text !== undefined) element.textContent = text;
+            return element;
+        }
+
+        function createProjectCard(project) {
+            const card = createElement(
+                'article',
+                'project-card group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-skybrand-400 rounded-2xl overflow-hidden bg-obsidian-950 border border-white/10 hover:border-skybrand-400/50 transition-all duration-300 flex flex-col justify-between shadow-xl'
+            );
+            card.dataset.action = 'open-project';
+            card.dataset.projectId = String(project.id);
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Ver ficha de proyecto: ${project.title}`);
+            card.tabIndex = 0;
+
+            const imageFrame = createElement('div', 'relative h-56 overflow-hidden');
+            const image = createElement('img', 'w-full h-full object-cover');
+            image.src = project.img;
+            image.alt = project.title;
+            image.loading = 'lazy';
+            image.decoding = 'async';
+            image.dataset.fallbackSrc = `https://placehold.co/800x600/0b0f17/38bdf8?text=${encodeURIComponent(project.title)}`;
+            const gradient = createElement('div', 'absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/20 to-transparent');
+            const badge = createElement('span', 'absolute top-3 left-3 px-2.5 py-1 rounded-md bg-obsidian-950/80 backdrop-blur-md border border-white/10 text-[10px] font-extrabold uppercase tracking-wider text-skybrand-400', project.badge);
+            const openIcon = createElement('span', 'absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md text-white group-hover:bg-skybrand-400 group-hover:text-obsidian-950 flex items-center justify-center transition-colors');
+            const icon = createElement('i', 'fa-solid fa-arrow-up-right-from-square text-xs');
+            icon.setAttribute('aria-hidden', 'true');
+            openIcon.appendChild(icon);
+            imageFrame.append(image, gradient, badge, openIcon);
+
+            const details = createElement('div', 'p-4');
+            const title = createElement('h3', 'font-display font-bold text-white text-base group-hover:text-skybrand-400 transition-colors', project.title);
+            const metadata = createElement('div', 'flex items-center justify-between text-xs text-steel-400 mt-1.5');
+            metadata.append(
+                createElement('span', '', project.location),
+                createElement('span', 'font-mono text-steel-300', project.year)
+            );
+            details.append(title, metadata);
+            card.append(imageFrame, details);
+            return card;
+        }
+
+        function renderFeaturedGallery(filter = 'all') {
+            const grid = document.getElementById('featured-grid');
+            if (!grid) return;
+
+            const items = filter === 'all'
+                ? featuredProjects
+                : featuredProjects.filter(project => project.category === filter);
+            const fragment = document.createDocumentFragment();
+            items.forEach(project => fragment.appendChild(createProjectCard(project)));
+            grid.replaceChildren(fragment);
+        }
+
+        function filterGallery(cat, btnEl) {
+            document.querySelectorAll('.gal-filter').forEach(btn => {
+                btn.setAttribute('aria-pressed', btn === btnEl ? 'true' : 'false');
+                btn.classList.remove('bg-skybrand-400', 'text-obsidian-950', 'font-extrabold');
+                btn.classList.add('glass-dark', 'text-steel-200', 'font-bold');
+            });
+            if (btnEl) {
+                btnEl.classList.remove('glass-dark', 'text-steel-200', 'font-bold');
+                btnEl.classList.add('bg-skybrand-400', 'text-obsidian-950', 'font-extrabold');
+            }
+            renderFeaturedGallery(cat);
+            if (window.gsap && !prefersReducedMotion) {
+                gsap.fromTo('#featured-grid .project-card',
+                    { opacity: 0, y: 24, scale: 0.97 },
+                    { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.05, ease: 'power3.out' }
+                );
+            }
+        }
+
+        // Modal de detalle de obra
+        function openProjectModal(id) {
+            const proj = featuredProjects.find(p => p.id === id);
+            if (!proj) return;
+
+            const modalImage = document.getElementById('modal-img');
+            modalImage.src = proj.img;
+            modalImage.dataset.fallbackSrc = `https://placehold.co/800x600/0b0f17/38bdf8?text=${encodeURIComponent(proj.title)}`;
+            delete modalImage.dataset.fallbackApplied;
+            document.getElementById('modal-badge').textContent = proj.badge;
+            document.getElementById('modal-title').textContent = proj.title;
+            document.getElementById('modal-location').textContent = proj.location;
+            document.getElementById('modal-year').textContent = proj.year;
+            document.getElementById('modal-desc').textContent = proj.desc;
+
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // 3. Listado de Obras en Proceso y Terminadas con Preview Flotante
+        const worksRegistry = {
+            proceso: [
+                {
+                    title: "Ampliación Patio de Tanques Sur",
+                    category: "Obra Industrial y Petrolera",
+                    location: "Maturín, Monagas",
+                    progress: 78,
+                    img: "assets/operacion-terreno.webp"
+                },
+                {
+                    title: "Centro Empresarial y Galpón Logístico",
+                    category: "Construcción Civil",
+                    location: "Zona Industrial, Monagas",
+                    progress: 64,
+                    img: "assets/obra-cevidono.webp"
+                },
+                {
+                    title: "Procura de Válvulas y Bridas API 6D",
+                    category: "Procura Especializada",
+                    location: "Anaco, Anzoátegui",
+                    progress: 85,
+                    img: "assets/guia-productos.webp"
+                },
+                {
+                    title: "Adecuación Eléctrica Planta Compresora",
+                    category: "Montaje Electromecánico",
+                    location: "Punta de Mata, Monagas",
+                    progress: 52,
+                    img: "assets/sede-multiobras.webp"
+                }
+            ],
+            terminadas: [
+                {
+                    title: "Estación de Flujo Norte",
+                    category: "Obra Industrial y Petrolera",
+                    location: "Maturín, Monagas",
+                    year: "2025",
+                    img: "assets/multiobras-frente-obra.webp"
+                },
+                {
+                    title: "Complejo Logístico Oriente (3.200 m²)",
+                    category: "Construcción Civil",
+                    location: "Zona Industrial, Monagas",
+                    year: "2025",
+                    img: "assets/obra-cevidono.webp"
+                },
+                {
+                    title: "Edificio Corporativo IPC Multiobras",
+                    category: "Construcción Civil",
+                    location: "Maturín, Monagas",
+                    year: "2024",
+                    img: "assets/multibras-signaletica.webp"
+                },
+                {
+                    title: "Sistema Contra Incendio Planta Industrial",
+                    category: "Procura y Montaje",
+                    location: "Barcelona, Anzoátegui",
+                    year: "2024",
+                    img: "assets/guia-productos.webp"
+                }
+            ]
+        };
+
+        function switchWorkStatus(status) {
+            const btnProc = document.getElementById('btn-status-proceso');
+            const btnTerm = document.getElementById('btn-status-terminadas');
+            const isInProgress = status === 'proceso';
+
+            if (isInProgress) {
+                btnProc.classList.add('bg-skybrand-400', 'text-obsidian-950', 'font-extrabold');
+                btnProc.classList.remove('text-steel-300', 'font-bold');
+                btnTerm.classList.remove('bg-skybrand-400', 'text-obsidian-950', 'font-extrabold');
+                btnTerm.classList.add('text-steel-300', 'font-bold');
+            } else {
+                btnTerm.classList.add('bg-skybrand-400', 'text-obsidian-950', 'font-extrabold');
+                btnTerm.classList.remove('text-steel-300', 'font-bold');
+                btnProc.classList.remove('bg-skybrand-400', 'text-obsidian-950', 'font-extrabold');
+                btnProc.classList.add('text-steel-300', 'font-bold');
+            }
+
+            btnProc.setAttribute('aria-pressed', isInProgress ? 'true' : 'false');
+            btnTerm.setAttribute('aria-pressed', isInProgress ? 'false' : 'true');
+
+            const container = document.getElementById('works-list-container');
+            const list = worksRegistry[status];
+            if (!container || !list) return;
+
+            const fragment = document.createDocumentFragment();
+            list.forEach(item => {
+                const row = createElement('div', 'work-row py-6 px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer');
+                row.dataset.previewSrc = item.img;
+                row.dataset.previewTitle = item.title;
+
+                const description = createElement('div');
+                description.append(
+                    createElement('h3', 'work-title font-condensed font-extrabold text-2xl sm:text-3xl text-white uppercase tracking-wide transition-colors', item.title),
+                    createElement('p', 'text-xs text-steel-400 mt-1', `${item.category} • ${item.location}`)
+                );
+
+                const metadata = createElement('div', 'flex items-center gap-4 sm:min-w-[230px] justify-between sm:justify-end');
+                if (isInProgress) {
+                    const progress = createElement('div', 'flex items-center gap-3');
+                    const progressTrack = createElement('div', 'w-28 h-2 rounded-full bg-obsidian-800 overflow-hidden');
+                    const progressBar = createElement('div', 'h-full bg-skybrand-400 rounded-full');
+                    progressBar.style.width = `${item.progress}%`;
+                    progressTrack.appendChild(progressBar);
+                    progress.append(
+                        progressTrack,
+                        createElement('span', 'text-xs font-mono font-bold text-skybrand-400', `${item.progress}%`)
+                    );
+                    metadata.appendChild(progress);
+                } else {
+                    metadata.appendChild(createElement(
+                        'span',
+                        'px-3 py-1 rounded-full bg-skybrand-400/15 border border-skybrand-400/30 text-skybrand-400 text-xs font-bold',
+                        `Entregada • ${item.year}`
+                    ));
+                }
+
+                const icon = createElement('i', 'fa-solid fa-arrow-up-right-from-square text-xs text-steel-400');
+                icon.setAttribute('aria-hidden', 'true');
+                metadata.appendChild(icon);
+                row.append(description, metadata);
+                fragment.appendChild(row);
+            });
+            container.replaceChildren(fragment);
+        }
+
+        function showWorkPreview(e, imgUrl, title) {
+            const box = document.getElementById('floating-preview');
+            const img = document.getElementById('floating-preview-img');
+            const badge = document.getElementById('floating-preview-badge');
+            if (!box || !img) return;
+
+            img.src = imgUrl;
+            img.dataset.fallbackSrc = 'https://placehold.co/800x600/0b0f17/38bdf8?text=OBRA+MULTIOBRAS';
+            delete img.dataset.fallbackApplied;
+            badge.textContent = title;
+            box.classList.remove('opacity-0', 'scale-90');
+            box.classList.add('opacity-100', 'scale-100');
+            moveWorkPreview(e);
+        }
+
+        function moveWorkPreview(e) {
+            const box = document.getElementById('floating-preview');
+            if (!box) return;
+            box.style.left = `${e.clientX + 24}px`;
+            box.style.top = `${e.clientY - 88}px`;
+        }
+
+        function hideWorkPreview() {
+            const box = document.getElementById('floating-preview');
+            if (!box) return;
+            box.classList.add('opacity-0', 'scale-90');
+            box.classList.remove('opacity-100', 'scale-100');
+        }
+
+        // 4. Acordeón de Preguntas Frecuentes
+        function setFaqOpen(item, open, pinned = false) {
+            if (!item) return;
+            item.dataset.pinned = pinned ? 'true' : 'false';
+            item.dataset.open = open ? 'true' : 'false';
+
+            const button = item.querySelector('button');
+            const icon = item.querySelector('.faq-icon');
+            const content = item.querySelector('.faq-content');
+            if (button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (content) {
+                content.setAttribute('aria-hidden', open ? 'false' : 'true');
+                if (open) {
+                    if (content.hidden) {
+                        content.hidden = false;
+                        item.classList.remove('open');
+                        requestAnimationFrame(() => {
+                            if (item.dataset.open === 'true') item.classList.add('open');
+                        });
+                    } else {
+                        item.classList.add('open');
+                    }
+                } else {
+                    const wasOpen = item.classList.contains('open');
+                    item.classList.remove('open');
+                    if (content.hidden) content.hidden = true;
+                    else if (!wasOpen) {
+                        requestAnimationFrame(() => {
+                            if (item.dataset.open === 'false') content.hidden = true;
+                        });
+                    }
+                }
+            }
+            if (!icon) return;
+
+            icon.classList.toggle('bg-skybrand-400', open);
+            icon.classList.toggle('text-obsidian-950', open);
+            icon.classList.toggle('bg-white/10', !open);
+            icon.classList.toggle('text-white', !open);
+            const iconGlyph = icon.querySelector('i');
+            if (iconGlyph) {
+                iconGlyph.classList.toggle('fa-minus', open);
+                iconGlyph.classList.toggle('fa-plus', !open);
+            }
+        }
+
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            if (!item) return;
+            const isOpen = item.dataset.open === 'true';
+            const isPinned = item.dataset.pinned === 'true';
+
+            document.querySelectorAll('.faq-item').forEach(el => {
+                if (el !== item) setFaqOpen(el, false, false);
+            });
+
+            if (isOpen && isPinned) {
+                setFaqOpen(item, false, false);
+            } else {
+                setFaqOpen(item, true, true);
+            }
+        }
+
+        function handleFaqTransitionEnd(event) {
+            if (event.propertyName !== 'grid-template-rows') return;
+            const content = event.target;
+            const item = content.closest('.faq-item');
+            if (item && !item.classList.contains('open')) content.hidden = true;
+        }
+
+        function handleActionClick(event) {
+            const target = event.target instanceof Element
+                ? event.target.closest('[data-action]')
+                : null;
+            if (!target) return;
+
+            switch (target.dataset.action) {
+                case 'service-prev':
+                    prevService();
+                    break;
+                case 'service-next':
+                    nextService();
+                    break;
+                case 'service-slide':
+                    setServiceSlide(Number(target.dataset.serviceIndex));
+                    break;
+                case 'preset-contact-subject':
+                    presetContactSubject();
+                    break;
+                case 'gallery-filter':
+                    filterGallery(target.dataset.filter, target);
+                    break;
+                case 'work-status':
+                case 'work-status-link':
+                    switchWorkStatus(target.dataset.status);
+                    break;
+                case 'toggle-faq':
+                    toggleFaq(target);
+                    break;
+                case 'open-project':
+                    openProjectModal(Number(target.dataset.projectId));
+                    break;
+                case 'close-project-modal':
+                    closeProjectModal();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function handleActionKeydown(event) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            const target = event.target instanceof Element
+                ? event.target.closest('[data-action="open-project"][role="button"]')
+                : null;
+            if (!target) return;
+            event.preventDefault();
+            openProjectModal(Number(target.dataset.projectId));
+        }
+
+        function handleImageError(event) {
+            const image = event.target;
+            if (!(image instanceof HTMLImageElement)) return;
+
+            const fallbackSrc = image.dataset.fallbackSrc;
+            if (!fallbackSrc) {
+                console.error('Imagen sin recurso de respaldo:', image.currentSrc || image.src);
+                return;
+            }
+            if (image.dataset.fallbackApplied === 'true') {
+                console.error('No se pudo cargar la imagen ni su respaldo:', image.currentSrc || image.src);
+                return;
+            }
+
+            image.dataset.fallbackApplied = 'true';
+            image.src = fallbackSrc;
+        }
+
+        function initDelegatedInteractions() {
+            document.addEventListener('click', handleActionClick);
+            document.addEventListener('keydown', handleActionKeydown);
+            const faqContainer = document.getElementById('faq-container');
+            if (faqContainer) faqContainer.addEventListener('transitionend', handleFaqTransitionEnd);
+
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            const worksContainer = document.getElementById('works-list-container');
+            if (!worksContainer) return;
+
+            worksContainer.addEventListener('pointerover', event => {
+                const row = event.target instanceof Element
+                    ? event.target.closest('.work-row[data-preview-src]')
+                    : null;
+                if (!row || (event.relatedTarget instanceof Node && row.contains(event.relatedTarget))) return;
+                showWorkPreview(event, row.dataset.previewSrc, row.dataset.previewTitle);
+            });
+            worksContainer.addEventListener('pointermove', event => {
+                const row = event.target instanceof Element
+                    ? event.target.closest('.work-row[data-preview-src]')
+                    : null;
+                if (row) moveWorkPreview(event);
+            });
+            worksContainer.addEventListener('pointerout', event => {
+                const row = event.target instanceof Element
+                    ? event.target.closest('.work-row[data-preview-src]')
+                    : null;
+                if (!row || (event.relatedTarget instanceof Node && row.contains(event.relatedTarget))) return;
+                hideWorkPreview();
+            });
+        }
+
+        function initFaqInteractions() {
+            document.querySelectorAll('.faq-item').forEach(item => {
+                setFaqOpen(item, false, false);
+            });
+        }
+
+        // 5. Inicialización Cinematográfica Segura (con protección try/catch para que nunca quede bloqueada)
+        function hidePreloaderSafely() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && !preloader.classList.contains('loaded')) {
+                preloader.classList.add('loaded');
+            }
+        }
+
+        // Respaldo corto por si la inicialización queda bloqueada
+        setTimeout(hidePreloaderSafely, 300);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initDelegatedInteractions();
+            document.querySelectorAll('img[data-fallback-src]').forEach(image => {
+                if (image.complete && image.naturalWidth === 0) handleImageError({ target: image });
+            });
+
+            try {
+                // Renderizar galería y listado inicial de inmediato
+                renderFeaturedGallery('all');
+                switchWorkStatus('proceso');
+                initFaqInteractions();
+            } catch (err) {
+                console.error('Error renderizando contenido inicial:', err);
+            }
+
+            // Mostrar el Hero inmediatamente cuando el DOM esté listo
+            hidePreloaderSafely();
+
+            try {
+                // Inicializar Lenis para desplazamiento suave
+                if (window.Lenis && !prefersReducedMotion) {
+                    const lenis = new Lenis({
+                        duration: 0.65,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                        smoothWheel: true
+                    });
+
+                    if (window.gsap && window.ScrollTrigger) {
+                        lenis.on('scroll', ScrollTrigger.update);
+                        gsap.ticker.add((time) => lenis.raf(time * 1000));
+                        gsap.ticker.lagSmoothing(0);
+                    } else {
+                        const raf = (time) => {
+                            lenis.raf(time);
+                            requestAnimationFrame(raf);
+                        };
+                        requestAnimationFrame(raf);
+                    }
+
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', (e) => {
+                            const targetId = anchor.getAttribute('href');
+                            if (targetId && targetId.length > 1) {
+                                const targetEl = document.querySelector(targetId);
+                                if (targetEl) {
+                                    e.preventDefault();
+                                    lenis.scrollTo(targetEl, { offset: -80 });
+                                }
+                            }
+                        });
+                    });
+                }
+            } catch (err) {
+                console.warn('Lenis fallback activo:', err);
+            }
+
+            try {
+                // Coreografía GSAP + ScrollTrigger
+                if (window.gsap && window.ScrollTrigger) {
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    const capabilityCounters = document.querySelectorAll('#capacidad .counter-num');
+                    if (capabilityCounters.length) {
+                        if (prefersReducedMotion) {
+                            capabilityCounters.forEach(counter => {
+                                const target = Number(counter.dataset.target);
+                                if (!Number.isFinite(target)) {
+                                    console.error('Valor inválido en el contador de capacidad:', counter);
+                                    return;
+                                }
+                                counter.textContent = String(target);
+                            });
+                        } else {
+                            let countersHaveStarted = false;
+                            capabilityCounters.forEach(counter => {
+                                counter.textContent = '0';
+                            });
+
+                            ScrollTrigger.create({
+                                trigger: '#capacidad',
+                                start: 'top 80%',
+                                onEnter: () => {
+                                    if (countersHaveStarted) return;
+                                    countersHaveStarted = true;
+
+                                    capabilityCounters.forEach(counter => {
+                                        const target = Number(counter.dataset.target);
+                                        if (!Number.isFinite(target)) {
+                                            console.error('Valor inválido en el contador de capacidad:', counter);
+                                            return;
+                                        }
+
+                                        const count = { value: 0 };
+                                        gsap.to(count, {
+                                            value: target,
+                                            duration: 2.2,
+                                            ease: 'power1.out',
+                                            onUpdate: () => {
+                                                counter.textContent = String(Math.round(count.value));
+                                            },
+                                            onComplete: () => {
+                                                counter.textContent = String(target);
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        }
+                    }
+
+                    if (!prefersReducedMotion) {
+                    // Dividir títulos (.split-title) en palabras dentro de máscaras recortadas
+                        document.querySelectorAll('.split-title').forEach(titleEl => {
+                            const walkAndWrap = (node) => {
+                                if (node.nodeType === Node.TEXT_NODE) {
+                                    const text = node.textContent;
+                                    if (!text.trim()) return;
+                                    const fragment = document.createDocumentFragment();
+                                    text.split(/(\s+)/).forEach(part => {
+                                        if (/^\s+$/.test(part)) {
+                                            fragment.appendChild(document.createTextNode(part));
+                                        } else if (part.length > 0) {
+                                            const mask = document.createElement('span');
+                                            mask.className = 'split-line-mask';
+                                            const inner = document.createElement('span');
+                                            inner.className = 'split-word';
+                                            inner.textContent = part;
+                                            mask.appendChild(inner);
+                                            fragment.appendChild(mask);
+                                        }
+                                    });
+                                    node.parentNode.replaceChild(fragment, node);
+                                } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BR') {
+                                    Array.from(node.childNodes).forEach(walkAndWrap);
+                                }
+                            };
+                            Array.from(titleEl.childNodes).forEach(walkAndWrap);
+                        });
+
+                        // Dividir titular del Hero letra por letra
+                        document.querySelectorAll('#hero-headline .hero-line').forEach(line => {
+                            const rawText = line.textContent;
+                            const fragment = document.createDocumentFragment();
+                            rawText.split('').forEach(char => {
+                                const span = document.createElement('span');
+                                if (char === ' ') {
+                                    span.className = 'inline-block';
+                                    span.textContent = '\u00a0';
+                                } else {
+                                    span.className = 'hero-char';
+                                    span.textContent = char;
+                                }
+                                fragment.appendChild(span);
+                            });
+                            line.replaceChildren(fragment);
+                        });
+
+
+                    // Barra superior de progreso
+                    gsap.to('#scroll-progress', {
+                        scaleX: 1,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: document.body,
+                            start: 'top top',
+                            end: 'bottom bottom',
+                            scrub: 0.2
+                        }
+                    });
+
+                    // Animación de entrada del Hero
+                    gsap.from('.hero-char', {
+                        yPercent: 38,
+                        opacity: 0.45,
+                        duration: 0.65,
+                        stagger: 0.025,
+                        ease: 'power2.out',
+                        delay: 0
+                    });
+
+                    gsap.from('.hero-fade-el', {
+                        y: 22,
+                        opacity: 0,
+                        duration: 0.5,
+                        stagger: 0.1,
+                        ease: 'power3.out',
+                        delay: 0.05
+                    });
+
+                    // Parallax continuo en imagen del Hero
+                    gsap.to('#hero-bg-img', {
+                        yPercent: 8,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: '#inicio',
+                            start: 'top top',
+                            end: 'bottom top',
+                            scrub: true
+                        }
+                    });
+
+                    // Profundidad Parallax en marcos .depth-frame
+                    document.querySelectorAll('.depth-frame').forEach(frame => {
+                        const img = frame.querySelector('.depth-img');
+                        if (img) {
+                            gsap.fromTo(img,
+                                { yPercent: -4 },
+                                {
+                                    yPercent: 4,
+                                    ease: 'none',
+                                    scrollTrigger: {
+                                        trigger: frame,
+                                        start: 'top bottom',
+                                        end: 'bottom top',
+                                        scrub: true
+                                    }
+                                }
+                            );
+                        }
+                    });
+
+                    // Revelado palabra por palabra al hacer scroll
+                    document.querySelectorAll('.split-title').forEach(title => {
+                        const words = title.querySelectorAll('.split-word');
+                        if (words.length) {
+                            gsap.fromTo(words,
+                                { yPercent: 10, opacity: 0.94 },
+                                {
+                                    yPercent: 0,
+                                    opacity: 1,
+                                    duration: 0.75,
+                                    stagger: 0.025,
+                                    ease: 'none',
+                                    scrollTrigger: {
+                                        trigger: title,
+                                        start: 'top 88%',
+                                        end: 'top 62%',
+                                        scrub: true
+                                    }
+                                }
+                            );
+                        }
+                    });
+
+                    // Revelado suave de subtítulos
+                    document.querySelectorAll('.scroll-fade').forEach(el => {
+                        gsap.fromTo(el,
+                            { y: 10, opacity: 0.92 },
+                            {
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                ease: 'none',
+                                scrollTrigger: {
+                                    trigger: el,
+                                    start: 'top 92%',
+                                    end: 'top 68%',
+                                    scrub: true
+                                }
+                            }
+                        );
+                    });
+
+                    // Escala de profundidad en contenedores
+                    document.querySelectorAll('.scroll-scale').forEach(el => {
+                        gsap.fromTo(el,
+                            { scale: 0.985, y: 10, opacity: 0.94 },
+                            {
+                                scale: 1,
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                ease: 'none',
+                                scrollTrigger: {
+                                    trigger: el,
+                                    start: 'top 90%',
+                                    end: 'top 68%',
+                                    scrub: true
+                                }
+                            }
+                        );
+                    });
+
+                    // Entrada escalonada de tarjetas al bajar y al volver a subir
+                    document.querySelectorAll('.stagger-cards').forEach(group => {
+                        const cards = group.querySelectorAll('.stagger-item');
+                        if (!cards.length) return;
+
+                        gsap.fromTo(cards,
+                            { y: 12, opacity: 0.92 },
+                            {
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                stagger: 0.035,
+                                ease: 'none',
+                                scrollTrigger: {
+                                    trigger: group,
+                                    start: 'top 92%',
+                                    end: 'top 66%',
+                                    scrub: true
+                                }
+                            }
+                        );
+                    });
+                    }
+
+                }
+            } catch (err) {
+                console.warn('GSAP fallback activo:', err);
+            }
+
+            if (window.gsap && !prefersReducedMotion) {
+                document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                    const moveX = gsap.quickTo(btn, 'x', { duration: 0.25, ease: 'power3.out' });
+                    const moveY = gsap.quickTo(btn, 'y', { duration: 0.25, ease: 'power3.out' });
+                    btn.addEventListener('pointermove', event => {
+                        if (event.pointerType !== 'mouse') return;
+                        const rect = btn.getBoundingClientRect();
+                        moveX((event.clientX - rect.left - rect.width / 2) * 0.12);
+                        moveY((event.clientY - rect.top - rect.height / 2) * 0.12);
+                    });
+                    btn.addEventListener('pointerleave', () => {
+                        moveX(0);
+                        moveY(0);
+                    });
+                });
+            }
+
+            // Efecto Navbar al hacer scroll
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('nav-scrolled');
+                    } else {
+                        navbar.classList.remove('nav-scrolled');
+                    }
+                }, { passive: true });
+            }
+
+            // Menú móvil
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+                document.querySelectorAll('.mobile-link').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                });
+            }
+
+            // Cerrar modal con Escape o clic fuera
+            document.getElementById('project-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'project-modal') closeProjectModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeProjectModal();
+            });
+
+            // Formulario de cotización
+            const quoteForm = document.getElementById('quoteForm');
+            const successMsg = document.getElementById('formSuccessMsg');
+            quoteForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(quoteForm);
+                const details = [
+                    `Nombre y cargo: ${String(formData.get('name')).trim()}`,
+                    `Empresa: ${String(formData.get('company')).trim()}`,
+                    `Correo: ${String(formData.get('email')).trim()}`,
+                    `División: ${String(formData.get('area')).trim()}`,
+                    `Requerimiento: ${String(formData.get('message')).trim()}`
+                ].join('\n');
+
+                const whatsappLink = document.getElementById('whatsappFallbackLink');
+                whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(details)}`;
+                whatsappLink.classList.remove('hidden');
+                document.getElementById('formStatusHeading').textContent = 'Tu solicitud está lista para enviar por WhatsApp.';
+                document.getElementById('formStatusCopy').textContent = 'Revisa el mensaje y confirma su envío dentro de WhatsApp.';
+                successMsg.classList.remove('hidden');
+            });
+
+            // Gráficos Chart.js
+            try {
+                if (window.Chart) {
+                    const ctxEff = document.getElementById('efficiencyChart');
+                    if (ctxEff) {
+                        new Chart(ctxEff.getContext('2d'), {
+                            type: 'bar',
+                            data: {
+                                labels: ['Ingeniería', 'Procura', 'Obra Civil', 'Industrial'],
+                                datasets: [{
+                                    data: [99, 96, 98, 97],
+                                    backgroundColor: ['#38bdf8', '#ffffff', '#94a3b8', '#0ea5e9'],
+                                    borderRadius: 6
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                animation: prefersReducedMotion ? false : { duration: 1000 },
+                                plugins: { legend: { display: false } },
+                                scales: {
+                                    y: { min: 80, max: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+                                    x: { grid: { display: false }, ticks: { color: '#e2e8f0', font: { size: 10 } } }
+                                }
+                            }
+                        });
+                    }
+
+                    const ctxSec = document.getElementById('sectorsChart');
+                    if (ctxSec) {
+                        new Chart(ctxSec.getContext('2d'), {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Industrial y Petrolero', 'Construcción Civil', 'Procura'],
+                                datasets: [{
+                                    data: [45, 35, 20],
+                                    backgroundColor: ['#38bdf8', '#ffffff', '#64748b'],
+                                    borderColor: '#0b0f17',
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                animation: prefersReducedMotion ? false : { duration: 1000 },
+                                cutout: '68%',
+                                plugins: {
+                                    legend: {
+                                        position: 'bottom',
+                                        labels: { color: '#cbd5e1', padding: 12, usePointStyle: true, font: { size: 10 } }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            } catch (err) {
+                console.warn('Chart.js fallback:', err);
+            }
+        });
+        })();
+    </script>
+</body>
+</html>
